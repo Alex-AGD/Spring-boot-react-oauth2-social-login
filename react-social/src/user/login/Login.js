@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './Login.css';
-import { GOOGLE_AUTH_URL, GITHUB_AUTH_URL, ACCESS_TOKEN } from '../../constants';
-import { login } from '../../util/APIUtils';
-import { Link, Redirect } from 'react-router-dom'
+import {ACCESS_TOKEN, GITHUB_AUTH_URL, GOOGLE_AUTH_URL} from '../../constants';
+import {login} from '../../util/APIUtils';
+import {Link, Redirect} from 'react-router-dom'
 import googleLogo from '../../img/google-logo.png';
 import githubLogo from '../../img/github-logo.png';
 import Alert from 'react-s-alert';
@@ -85,10 +85,8 @@ class LoginForm extends Component {
     }
 
     handleSubmit(event) {
-        event.preventDefault();   
-
-        const loginRequest = Object.assign({}, this.state);
-
+        event.preventDefault();
+        const loginRequest = (this.state);
         login(loginRequest)
         .then(response => {
             localStorage.setItem(ACCESS_TOKEN, response.accessToken);

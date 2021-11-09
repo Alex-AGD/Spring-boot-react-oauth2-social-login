@@ -1,4 +1,4 @@
-import { API_BASE_URL, ACCESS_TOKEN } from '../constants';
+import {ACCESS_TOKEN, API_BASE_URL} from '../constants';
 
 const request = (options) => {
     const headers = new Headers({
@@ -23,9 +23,9 @@ const request = (options) => {
     );
 };
 
-export function getCurrentUser() {
-    if(!localStorage.getItem(ACCESS_TOKEN)) {
-        return Promise.reject("No access token set.");
+export async function getCurrentUser() {
+    if (!localStorage.getItem(ACCESS_TOKEN)) {
+        await Promise.reject("No access token set.");
     }
 
     return request({
