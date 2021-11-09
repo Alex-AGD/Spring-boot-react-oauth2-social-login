@@ -49,40 +49,40 @@ class Login extends Component {
     }
 }
 
-class SocialLogin extends Component {
-    render() {
-        return (
-            <div className="social-login">
-                <a className="btn btn-block social-btn google" href={GOOGLE_AUTH_URL}>
-                    <img src={googleLogo} alt="Google" /> Log in with Google</a>
-                <a className="btn btn-block social-btn github" href={GITHUB_AUTH_URL}>
-                    <img src={githubLogo} alt="Github" /> Log in with Github</a>
-            </div>
-        );
-    }
-}
-
-
-class LoginForm extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: '',
-            password: ''
-        };
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+    class SocialLogin extends Component {
+        render () {
+            return (
+                <div className="social-login">
+                    <a className="btn btn-block social-btn google" href={ GOOGLE_AUTH_URL }>
+                        <img src={ googleLogo } alt="Google"/> Log in with Google</a>
+                    <a className="btn btn-block social-btn github" href={ GITHUB_AUTH_URL }>
+                        <img src={ githubLogo } alt="Github"/> Log in with Github</a>
+                </div>
+            );
+        }
     }
 
-    handleInputChange(event) {
-        const target = event.target;
-        const inputName = target.name;        
-        const inputValue = target.value;
 
-        this.setState({
-            [inputName] : inputValue
-        });        
-    }
+    class LoginForm extends Component {
+        constructor (props) {
+            super (props);
+            this.state = {
+                name: '',
+                password: ''
+            };
+            this.handleInputChange = this.handleInputChange.bind (this);
+            this.handleSubmit = this.handleSubmit.bind (this);
+        }
+
+        handleInputChange (event) {
+            const target = event.target;
+            const inputName = target.name;
+            const inputValue = target.value;
+
+            this.setState ({
+                [ inputName ]: inputValue
+            });
+        }
 
     handleSubmit(event) {
         event.preventDefault();

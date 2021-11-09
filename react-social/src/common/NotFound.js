@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './NotFound.css';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
-class NotFound extends Component {
-    render() {
+function NotFound () {
         return (
             <div className="page-not-found">
                 <h1 className="title">
@@ -15,7 +14,6 @@ class NotFound extends Component {
                 <Link to="/"><button className="go-back-btn btn btn-primary" type="button">Go Back</button></Link>
             </div>
         );
-    }
 }
 
 export default NotFound;
