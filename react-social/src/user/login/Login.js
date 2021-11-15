@@ -9,30 +9,19 @@ import Alert from 'react-s-alert';
 
 class Login extends Component {
     componentDidMount() {
-        // If the OAuth2 login encounters an error, the user is redirected to the /login page with an error.
-        // Here we display the error and then remove the error query parameter from the location.
-        if(this.props.location.state && this.props.location.state.error) {
-            setTimeout(() => {
-                Alert.error(this.props.location.state.error, {
-                    timeout: 5000
-                });
-                this.props.history.replace({
-                    pathname: this.props.location.pathname,
-                    state: {}
-                });
-            }, 100);
-        }
+
     }
-    
-    render() {
-        if(this.props.authenticated) {
+    componentDidUpdate (prevProps, prevState, snapshot) {
+        if( prevProps.authenticated !== this.props.authenticated ) {
             return <Redirect
                 to={{
-                pathname: "/",
-                state: { from: this.props.location }
-            }}/>;            
+                    pathname: "/",
+                    state: { from: this.props.location }
+                }}/>;
         }
+    }
 
+    render() {
         return (
             <div className="login-container">
                 <div className="login-content">
@@ -49,18 +38,18 @@ class Login extends Component {
     }
 }
 
-    class SocialLogin extends Component {
-        render () {
-            return (
-                <div className="social-login">
-                    <a className="btn btn-block social-btn google" href={ GOOGLE_AUTH_URL }>
-                        <img src={ googleLogo } alt="Google"/> Log in with Google</a>
-                    <a className="btn btn-block social-btn github" href={ GITHUB_AUTH_URL }>
-                        <img src={ githubLogo } alt="Github"/> Log in with Github</a>
-                </div>
-            );
-        }
-    }
+
+
+function SocialLogin () {
+    return (
+        <div className="social-login">
+            <a className="btn btn-block social-btn google" href={ GOOGLE_AUTH_URL }>
+                <img src={ googleLogo } alt="Google"/> Log in with Google</a>
+            <a className="btn btn-block social-btn github" href={ GITHUB_AUTH_URL }>
+                <img src={ githubLogo } alt="Github"/> Log in with Github</a>
+        </div>
+    );
+}
 
 
     class LoginForm extends Component {

@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
-import {
-    Route,
-    Switch
-} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import AppHeader from '../common/AppHeader';
 import Home from '../home/Home';
 import Login from '../user/login/Login';
@@ -59,7 +56,6 @@ class App extends Component {
     componentDidMount() {
         this.loadCurrentlyLoggedInUser();
     }
-
     render() {
         if (this.state.loading) {
             return <LoadingIndicator/>
