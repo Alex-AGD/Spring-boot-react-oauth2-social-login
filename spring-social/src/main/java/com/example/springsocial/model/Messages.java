@@ -2,13 +2,10 @@ package com.example.springsocial.model;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -16,14 +13,12 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Table(name = "Messages")
+@ToString(of = {"id","message"})
 @Entity
 public class Messages {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Type(type="org.hibernate.type.UUIDCharType")
-    @Column(length = 36, columnDefinition = "varchar", updatable = false, nullable = false)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @Version
     private Long version;
@@ -38,7 +33,7 @@ public class Messages {
     private String message;
 
     @ManyToOne(targetEntity = User.class)
-    @JoinColumn(name = "user_name")
+    @JoinColumn(name = "users_id")
     private User user;
 
 }
