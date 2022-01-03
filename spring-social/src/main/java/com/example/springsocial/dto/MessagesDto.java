@@ -1,6 +1,8 @@
 package com.example.springsocial.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.example.springsocial.model.User;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,13 +18,10 @@ import java.time.LocalDateTime;
 @Builder
 public class MessagesDto implements Serializable {
     private long id;
-
-    @JsonBackReference
+    @JsonProperty("message")
     private String message;
-
-    private UserDto user;
-
+    private User user;
     private LocalDateTime createdDate;
-
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
     private Timestamp lastModifiedDate;
 }

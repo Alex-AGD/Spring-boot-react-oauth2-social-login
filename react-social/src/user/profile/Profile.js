@@ -12,15 +12,20 @@ function Profile (props) {
                                 <img src={ props.currentUser.imageUrl } alt={ props.currentUser.name }/>
                             ) : (
                                 <div className="text-avatar">
-                                    <span>{ props.currentUser.name && props.currentUser.name[ 0 ] }</span>
+                                    <span>{ props.currentUser.name }</span>
                                 </div>
                             )
                         }
                     </div>
                     <div className="profile-name">
-                        <h2>{ props.currentUser.name }</h2>
-                        <p className="profile-email">{ props.currentUser.email }</p>
+                        <h2>Email</h2>
+                        <p className="profile-email">{ props.currentUser.email ? props.currentUser.email : 'Email NotFound' }</p>
                     </div>
+                    <div className="profile-name">
+                        <h2>Учетная запись </h2>
+                        <p className="profile-email">{ props.currentUser.provider }</p>
+                    </div>
+
                 </div>
             </div>
         </div>

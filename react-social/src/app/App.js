@@ -15,6 +15,7 @@ import Alert from 'react-s-alert';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 import './App.css';
+import Input from "../utilHooks/input";
 
 class App extends Component {
     constructor(props) {
@@ -78,7 +79,9 @@ class App extends Component {
                                render={(props) => <Signup authenticated={this.state.authenticated} {...props} />}/>
                         <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}/>
                         <Route component={NotFound}/>
+                        <Route exact path="/go" component={Input}/>
                     </Switch>
+
                 </div>
                 <Alert stack={{limit: 3}}
                        timeout={3000}

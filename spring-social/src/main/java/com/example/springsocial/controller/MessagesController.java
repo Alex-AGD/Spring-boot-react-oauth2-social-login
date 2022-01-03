@@ -1,6 +1,8 @@
 package com.example.springsocial.controller;
 
 
+import com.example.springsocial.dto.MessagesDto;
+import com.example.springsocial.mappers.MessagesMapper;
 import com.example.springsocial.model.Messages;
 import com.example.springsocial.repository.MessageRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -20,16 +22,17 @@ import java.util.List;
     @CrossOrigin(origins = "http://localhost:8081")
     public class MessagesController {
     private final MessageRepository messageRepository;
+    private final MessagesMapper messagesMapper;
 
+    private static final Logger logger = LoggerFactory.getLogger(MessagesController.class);
 
-    private final static Logger logger = LoggerFactory.getLogger(MessagesController.class);
-
-    public MessagesController( MessageRepository messageRepository) {
+    public MessagesController(MessageRepository messageRepository, MessagesMapper messagesMapper) {
         this.messageRepository = messageRepository;
+        this.messagesMapper = messagesMapper;
     }
 
     @GetMapping
-    public ResponseEntity<List<Messages>> getAllMessages(@RequestParam(required = false) String title) {
+    public ResponseEntity<List<MessagesDto>> getAllMessages(@RequestParam(required = false) String title) {
         try {
             List<Messages> messagesList = new ArrayList<>();
             messageRepository.findAll();
@@ -38,8 +41,8 @@ import java.util.List;
             if (messagesList.isEmpty()) {
                 new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-            logger.debug("ListUsers" + messagesList);
-            return new ResponseEntity<>(messagesList, HttpStatus.OK);
+            logger.debug("ListUsersL {}",  messagesList);
+            return ResponseEntity.ok(messagesMapper.toMessagesDto(messagesList));
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -47,9 +50,10 @@ import java.util.List;
 
 
     @PostMapping
-    public ResponseEntity<Messages> createMessage(@RequestBody Messages message) {
+    public ResponseEntity<Messages> createMessage(@RequestBody MessagesDto messagesDto) {
         try {
-            return new ResponseEntity<>(messageRepository.save(message), HttpStatus.OK);
+            Messages toMessage = messagesMapper.toMessage(messagesDto);
+            return ResponseEntity.ok(messageRepository.save(toMessage));
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
