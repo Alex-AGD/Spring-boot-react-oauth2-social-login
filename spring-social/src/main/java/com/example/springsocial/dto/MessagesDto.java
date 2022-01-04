@@ -8,7 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
+import javax.persistence.ManyToOne;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
@@ -16,10 +16,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MessagesDto implements Serializable {
-    private long id;
+public class MessagesDto  {
     @JsonProperty("message")
     private String message;
+    @ManyToOne
     private User user;
     private LocalDateTime createdDate;
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")

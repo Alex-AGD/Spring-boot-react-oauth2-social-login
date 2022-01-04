@@ -23,7 +23,6 @@ public class UserMapperImpl implements UserMapper {
     @Override
     public UserDto toUserDTO(User user) {
         UserDto userDTO = new UserDto();
-        userDTO.setId(user.getId());
         userDTO.setUserName(user.getName());
         userDTO.setEmail(user.getEmail());
         userDTO.setImageUrl(user.getImageUrl());
@@ -36,7 +35,6 @@ public class UserMapperImpl implements UserMapper {
             return null;
         } else {
             User user = new User();
-            user.setId(userDto.getId());
             user.setName(userDto.getUserName());
             user.setEmail(userDto.getEmail());
             user.setImageUrl(userDto.getImageUrl());

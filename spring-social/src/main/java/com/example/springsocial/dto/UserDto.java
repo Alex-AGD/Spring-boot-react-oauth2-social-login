@@ -14,11 +14,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 public class UserDto implements Serializable {
-    @JsonProperty("id")
-    private Long id;
     @JsonProperty("userName")
     private String userName;
-
     @Email
     @JsonProperty("email")
     private String email;

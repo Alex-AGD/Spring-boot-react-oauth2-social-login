@@ -21,25 +21,23 @@ public class MessagesMapperImpl implements MessagesMapper {
 
     @Override
     public MessagesDto toMessageDto(Messages messages) {
-        MessagesDto toMessageDto = new MessagesDto();
-        toMessageDto.setUser(messages.getUser());
-        toMessageDto.setMessage(messages.getMessage());
-        toMessageDto.setLastModifiedDate(messages.getLastModifiedDate());
-        return toMessageDto;
+        return MessagesDto
+                .builder()
+                .user(messages.getUser())
+                .message(messages.getMessage())
+                .lastModifiedDate(messages.getLastModifiedDate())
+                .build();
     }
 
 
     @Override
     public Messages toMessage(MessagesDto messagesDto) {
-        if (messagesDto == null) {
-            return null;
-        } else {
-            Messages messages = new Messages();
-            messages.setId(messagesDto.getId());
-            messages.setMessage(messagesDto.getMessage());
-            messages.setUser(messagesDto.getUser());
-            messages.setLastModifiedDate(messagesDto.getLastModifiedDate());
-            return messages;
-        }
+        return Messages
+                .builder()
+                .message(messagesDto.getMessage())
+                .user(messagesDto.getUser())
+                .lastModifiedDate(messagesDto.getLastModifiedDate())
+                .build();
     }
 }
+
