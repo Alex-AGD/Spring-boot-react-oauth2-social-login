@@ -1,14 +1,14 @@
 import './App.css';
-import Register from "./components/registerForm/register";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Login from "./components/login/Login";
+import LoginForm from "./components/login/LoginForm";
+
 
 function App() {
   return (
     <div className="App">
-      <Register/>
-        <Login/>
+        <LoginForm />
     </div>
+
   );
 }
 
