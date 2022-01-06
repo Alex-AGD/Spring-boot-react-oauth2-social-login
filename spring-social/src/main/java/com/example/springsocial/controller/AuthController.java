@@ -25,7 +25,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
@@ -53,7 +52,6 @@ public class AuthController {
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = tokenProvider.createToken(authentication);
-        Optional<User> userName = userRepository.findByUserName(loginRequest.getName());
         return ResponseEntity.ok(new AuthResponse(token));
     }
 
@@ -65,7 +63,6 @@ public class AuthController {
          if (!ObjectUtils.isEmpty(userRepository.findByUserName(signUpRequest.getName()))){
             throw new BadRequestException("Login address already in use.");
             }
-
         User user = new User();
         user.setName(signUpRequest.getName());
         user.setEmail(signUpRequest.getEmail());
