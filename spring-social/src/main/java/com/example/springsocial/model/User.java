@@ -56,8 +56,8 @@ public class User implements Serializable {
         return userName;
     }
 
-    public void setName(String name) {
-        this.userName = name;
+    public void setName(String userName) {
+        this.userName = userName;
     }
 
     public String getEmail() {
