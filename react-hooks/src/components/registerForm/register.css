@@ -1,7 +1,12 @@
-.register-form{
-  display: inline-block;
-  align-content: center;
-  width: 30%;
-  color: #61dafb;
 
+.register-form{
+  background: #fff;
+  box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
+  border-radius: 2px;
+  width: 50%;
+  display: inline-block;
+  margin-top: 30px;
+  vertical-align: middle;
+  position: relative;
+  padding: 35px;
 }

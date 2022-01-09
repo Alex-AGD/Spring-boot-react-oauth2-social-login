@@ -1,7 +1,4 @@
-import axios from "axios";
 import {ACCESS_TOKEN, API_BASE_URL} from "../constants";
-
-const API_URL_REGISTER = "http://localhost:8081/signup";
 export const API_URL_LOGIN = "http://localhost:8081/auth/login";
 
 const request = (options) => {
@@ -26,13 +23,13 @@ const request = (options) => {
         );
 };
 
-const register = (username, email, password) => {
-    return axios.post (API_URL_REGISTER + "signup", {
-        username,
-        email,
-        password,
+export function signup(signupRequest) {
+    return request({
+        url: API_BASE_URL + "/auth/signup",
+        method: 'POST',
+        body: JSON.stringify(signupRequest)
     });
-};
+}
 
 
 export function login(loginRequest) {
@@ -55,12 +52,6 @@ export async function getCurrentUser() {
 }
 
 
-const logout = () => {
+export const logout = () => {
     localStorage.removeItem("user");
-};
-
-export default {
-    register,
-    login,
-    logout,
 };

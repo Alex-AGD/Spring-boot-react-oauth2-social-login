@@ -8,16 +8,13 @@ import {ACCESS_TOKEN, GITHUB_AUTH_URL, GOOGLE_AUTH_URL} from "../../constants";
 import './Login.css';
 import googleLogo from "../../img/google-logo.png";
 import githubLogo from "../../img/github-logo.png";
-import {Link, Route, Switch} from "react-router-dom";
-import OAuth2RedirectHandler from "./oauth2/OAuth2RedirectHandler";
+import {Link} from "react-router-dom";
 
 const required = (value) => {
     if (!value) {
-        return (
-            <div className="alert alert-danger" role="alert">
-                Поле не может быть пустым!
-            </div>
-        );
+        return (<div className="alert alert-danger" role="alert">
+            Поле не может быть пустым!
+        </div>);
     }
 };
 
@@ -37,9 +34,6 @@ const LoginForm = (props) => {
                 setCurrentUser(response)
                 setLoading(false)
                 setAuthenticated(true)
-                return () => {
-
-                }
             }).catch(e => {
             setLoading(false)
             console.log(e)
@@ -61,12 +55,10 @@ const LoginForm = (props) => {
         setLoading(true);
         const loginRequest = ({name: username, password: password});
         form.current.validateAll();
-
         login(loginRequest)
             .then(r => {
                 localStorage.setItem(ACCESS_TOKEN, r.accessToken);
                 setLoading(false)
-                window.location.reload();
             })
             .catch(error => {
                 console.log("error")
@@ -105,35 +97,29 @@ const LoginForm = (props) => {
                             />
                         </div>
                         <div className="form-group">
-                            <button className="btn btn-primary btn-block" disabled={loading}>
-                                {loading && (
-                                    <span className="spinner-border spinner-border-sm"></span>
-                                )}
+                            <button className="btn btn-primary btn-block"
+                                    disabled={loading}>
+                                {loading && (<span className="spinner-border spinner-border-sm"></span>)}
                                 <span>Login</span>
                             </button>
                         </div>
-                        <CheckButton style={{ display: "none" }} ref={checkBtn} />
+                        <CheckButton style={{display: "none"}} ref={checkBtn}/>
 
                     </Form>
                 </div>
                 <div className="social-login">
-                    <a className="btn btn-block social-btn google" href={ GOOGLE_AUTH_URL }>
-                        <img src={ googleLogo } alt="Google"/> Log in with Google</a>
-                    <a className="btn btn-block social-btn github" href={ GITHUB_AUTH_URL }>
-                        <img src={ githubLogo } alt="Github"/> Log in with Github</a>
+                    <a className="btn btn-block social-btn google" href={GOOGLE_AUTH_URL}>
+                        <img src={googleLogo} alt="Google"/> Log in with Google</a>
+                    <a className="btn btn-block social-btn github" href={GITHUB_AUTH_URL}>
+                        <img src={githubLogo} alt="Github"/> Log in with Github</a>
                 </div>
                 <div className="or-separator">
                     <span className="or-text">OR</span>
                 </div>
-                <span className="signup-link">New user? <Link to="/signup">Sign up!</Link></span>
+                <span className="signup-link">New user?
+                    <Link to="/signup">Sign up!</Link></span>
             </div>
-            <Switch>
-                <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}/>
-            </Switch>
         </div>
-
-
-
     );
 };
 
